@@ -1,5 +1,10 @@
 {
   "dependencies": {
+    "inquirer": "^9.1.4",
+    "mysql2": "^2.3.3",
     "node.js": "^0.0.1-security"
+  },
+  "scripts": {
+    "seed": "node seed.js"
   }
 }
