@@ -40,7 +40,7 @@ class DB {
       );
   }
 
-  createDepartment() {
+  createDepartment(department) {
     return this.connection
       .promise()
       .query("INSERT INTO department SET ?", department);
@@ -62,8 +62,8 @@ class DB {
     return this.connection
       .promise()
       .query("UPDATE employee SET manager_id = ? WHERE id = ?", [
-        employeeId,
         managerId,
+        employeeId,
       ]);
   }
 }
