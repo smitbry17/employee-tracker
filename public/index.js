@@ -21,7 +21,7 @@ class DB {
       );
   }
 
-  createEmployee() {
+  createEmployee(employee) {
     return this.connection
       .promise()
       .query("INSERT INTO employee SET ?", employee);
@@ -36,11 +36,36 @@ class DB {
     return this.connection
       .promise()
       .query(
-        "SELECT role.salary, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id"
+        "SELECT role.id, role.salary, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id"
       );
   }
 
-  
+  createDepartment() {
+    return this.connection
+      .promise()
+      .query("INSERT INTO department SET ?", department);
+  }
+
+  createRole(role) {
+    return this.connection.promise().query("INSERT INTO role SET ?", role);
+  }
+
+  updateEmployeeRole(employeeId, roleId) {
+    return this.connection
+      .promise()
+      .query("UPDATE employee SET role_id = ? WHERE id = ?", [
+        roleId,
+        employeeId,
+      ]);
+  }
+  updateEmployeeManager(employeeId, managerId) {
+    return this.connection
+      .promise()
+      .query("UPDATE employee SET manager_id = ? WHERE id = ?", [
+        employeeId,
+        managerId,
+      ]);
+  }
 }
 
 module.exports = new DB(connection);
